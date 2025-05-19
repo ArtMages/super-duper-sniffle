@@ -1,34 +1,54 @@
-﻿#include <iostream>
+﻿// Підключення бібліотек
+#include <iostream>
+#include <algorithm>
 #include <windows.h>
 
+// Оголошення простору імен
+using namespace std;
+
+// Функція бульбашкового сортування масива по зростанню
+void BubbleSort(int numbers[], int size) {
+    bool swapped;
+
+    for (int i = 0; i < size - 1; i++) {
+        swapped = false;
+
+        for (int j = 0; j < size - i - 1; j++) {
+            if (numbers[j] > numbers[j + 1]) {
+                swap(numbers[j], numbers[j + 1]);
+                swapped = true;
+            }
+        }
+
+        if (!swapped) break; // Якщо не було обмінів - масив уже відсортований
+    }
+}
+
+// Основна функція
 int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    const int SIZE = 8;
-    int n[SIZE];
+    // Оголошення змінних
+    const int ARRAY_SIZE = 8;
+    int number[ARRAY_SIZE];
 
-    std::cout << "Введіть 8 чисел:\n";
-    for (int i = 0; i < SIZE; i = i + 1) {
-        std::cout << "Число " << i + 1 << ": ";
-        std::cin >> n[i];
+    // Введення масиву
+    cout << "Введіть 8 чисел:\n";
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        cout << "Число " << i + 1 << ": ";
+        cin >> number[i];
     }
 
-    for (int i = 0; i < SIZE - 1; i = i + 1) {
-        for (int j = 0; j < SIZE - i - 1; j = j + 1) {
-            if (n[j] > n[j + 1]) {
-                int temp = n[j];
-                n[j] = n[j + 1];
-                n[j + 1] = temp;
-            }
-        }
+    // Виклик функції сортування
+    BubbleSort(number, ARRAY_SIZE);
+
+    // Виведення результату
+    cout << "\nВідсортовані числа (від найменшого до найбільшого):\n";
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        cout << number[i] << " ";
     }
 
-    std::cout << "\nВідсортовані числа (від найменшого до найбільшого):\n";
-    for (int i = 0; i < SIZE; i = i + 1) {
-        std::cout << n[i] << " ";
-    }
-
-    std::cout << std::endl;
+    cout << endl;
     return 0;
 }
